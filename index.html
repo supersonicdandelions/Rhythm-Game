@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Split Rhythm</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header>
+        <div>
+          <p class="eyebrow">PRECISION RHYTHM PRACTICE</p>
+          <h1>Split Rhythm</h1>
+        </div>
+        <div class="status-pill" id="statusText">Calibrate to begin</div>
+      </header>
+
+      <section class="control-panel" aria-label="Exercise controls">
+        <label>Tempo <output id="tempoValue">80 BPM</output><input id="tempo" type="range" min="40" max="180" value="80" /></label>
+        <label>Exercise
+          <select id="pattern">
+            <option value="2:3">2 against 3</option>
+            <option value="3:4">3 against 4</option>
+            <option value="4:5">4 against 5</option>
+          </select>
+        </label>
+        <label>Left key <button class="key-button" id="leftKey" type="button">A</button></label>
+        <label>Right key <button class="key-button" id="rightKey" type="button">L</button></label>
+        <button class="key-button" id="home" type="button">Home</button>
+        <button class="primary" id="calibrate" type="button">Calibrate</button>
+        <label class="offset-control">Manual offset <output id="offsetValue">Auto</output><input id="manualOffset" type="range" min="-100" max="100" value="0" step="1" disabled /></label>
+        <button class="key-button" id="useAuto" type="button" disabled>Auto</button>
+        <label class="offset-control">Guide sound timing <output id="audioOffsetValue">0 ms</output><input id="audioOffset" type="range" min="-150" max="150" value="0" step="1" /></label>
+        <button class="key-button" id="audioTest" type="button">Sync guide audio</button>
+        <button class="primary" id="start" type="button" disabled>Start practice</button>
+      </section>
+
+      <section class="calibration-card hidden" id="calibrationCard">
+        <div><p class="eyebrow">VISUAL INPUT CALIBRATION</p><h2>Tap with, or slightly ahead of, the flash</h2><p>Make eight relaxed taps. Early taps count as negative timing; late taps count as positive.</p></div>
+        <div class="calibration-meter"><span id="calibrationCount">0 / 8</span></div>
+      </section>
+      <p class="calibration-summary" id="calibrationSummary">Not calibrated yet</p>
+
+      <section class="stage" aria-label="Rhythm lanes">
+        <div class="measure-labels"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+        <div class="lanes" id="lanes">
+          <div class="lane left-lane" id="leftLane"><div class="lane-info"><span>LEFT</span><kbd id="leftKeyDisplay">A</kbd></div><div class="track"></div></div>
+          <div class="lane right-lane" id="rightLane"><div class="lane-info"><span>RIGHT</span><kbd id="rightKeyDisplay">L</kbd></div><div class="track"></div></div>
+          <div class="hit-line"><span>HIT</span></div>
+        </div>
+        <div class="timing-readout" id="feedback" aria-live="polite">Ready when you are</div>
+        <section class="session-summary hidden" id="sessionSummary" aria-live="polite">
+          <p class="eyebrow">PRACTICE COMPLETE</p><h2 id="summaryHeadline">—</h2><p id="summaryDetail"></p><div class="summary-columns"><p id="summaryLeft"></p><p id="summaryRight"></p></div><button class="primary" id="retry" type="button">Try again</button><span class="retry-hint">or press any key</span>
+        </section>
+      </section>
+
+      <section class="results" aria-label="Practice results">
+        <article><p class="eyebrow">LEFT HAND</p><strong id="leftPerfect">—</strong><span>perfect notes</span><div class="miss-bar" id="leftMissBar"></div><p id="leftStats">No targets yet</p></article>
+        <article><p class="eyebrow">RIGHT HAND</p><strong id="rightPerfect">—</strong><span>perfect notes</span><div class="miss-bar" id="rightMissBar"></div><p id="rightStats">No targets yet</p></article>
+        <article><p class="eyebrow">SESSION</p><strong id="sessionScore">—</strong><span>perfect notes</span><p id="sessionStats">±25 ms is Perfect</p></article>
+      </section>
+
+      <p class="hint">Guide sounds: <b>don</b> left, <b>kah</b> right. Your press responds instantly; scoring uses your calibrated timing.</p>
+    </main>
+    <script src="game.js"></script>
+  </body>
+</html>
